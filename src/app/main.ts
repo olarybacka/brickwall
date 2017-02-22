@@ -29,7 +29,7 @@ const ballElement: HTMLElement = <HTMLElement>document.getElementsByClassName("b
 setInterval(() => {
     let posX = ball.posX;
     let posY = ball.posY;
-    // ball.move();
+    ball.move();
 
     ballElement.style.left = posX + 'px';
     ballElement.style.top = posY + 'px';
