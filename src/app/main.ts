@@ -1,39 +1,31 @@
-import { data } from "./helper";
+import { Ball } from './ball';
+import { randomColor } from './helpers';
+
+
+
 
 const container = document.querySelector(".container");
+const ballElement: HTMLElement = <HTMLElement>document.querySelector(".ball");
+const boardElement: HTMLElement = <HTMLElement>document.querySelector(".game-board");
 
-class Ball {
-    posX:number;
-    posY:number;
-    dirX:number;
-    dirY:number;
-    
-    constructor(posX:number, posY:number, dirX:number, dirY:number) {
-        this.posX = posX;
-        this.posY = posY;
-        this.dirX = dirX;
-        this.dirY = dirY;
-     }
+const ball:Ball = new Ball(parseInt(getComputedStyle(ballElement)['border-top-left-radius']), ballElement.offsetLeft, ballElement.offsetTop, 1, -1);
 
-    move() {
-        this.posX += this.dirX;
-        this.posY += this.dirY;
-     } 
 
-}
 
-const ball:Ball = new Ball(100, 100, 1, 1);
+//set the board
+randomColor();
 
-const ballElement: HTMLElement = <HTMLElement>document.getElementsByClassName("ball")[0];
+// constraints
+ball.setConstraints(0, 0, boardElement.offsetWidth, boardElement.offsetHeight);
 
+
+// move the ball 
 setInterval(() => {
-    let posX = ball.posX;
-    let posY = ball.posY;
-    ball.move();
+    let {x: posX, y: posY} = ball.move();
 
     ballElement.style.left = posX + 'px';
     ballElement.style.top = posY + 'px';
-}, 10)
+}, 10) 
 
 
 
